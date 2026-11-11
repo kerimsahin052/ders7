@@ -10,11 +10,19 @@ app.use(express.json());
 app.get("/health", (req, res) => {
   res.json({
     status: "ok",
-    student: "2416501039",
-    time: new Date().toISOString()
+    time: new Date().toISOString(),
+    student: "2416501039"
   });
 });
 
 app.use("/events", eventRoutes);
+
+app.use((req, res) => {
+  res.status(404).json({
+    error: {
+      message: "Route not found"
+    }
+  });
+});
 
 export default app;
