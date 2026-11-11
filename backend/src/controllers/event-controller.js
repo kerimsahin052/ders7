@@ -19,3 +19,45 @@ export function getEventById(req, res) {
 
   res.status(200).json(event);
 }
+export function createEvent(req, res) {
+  const {
+    title,
+    category,
+    capacity,
+    date,
+    time,
+    location,
+    description
+  } = req.body;
+
+  if (
+    !title ||
+    !category ||
+    !capacity ||
+    !date ||
+    !time ||
+    !location ||
+    !description
+  ) {
+    return res.status(400).json({
+      error: {
+        message: "Tüm alanlar zorunludur"
+      }
+    });
+  }
+
+  const newEvent = {
+    id: `event-${Date.now()}`,
+    title,
+    category,
+    capacity: Number(capacity),
+    date,
+    time,
+    location,
+    description
+  };
+
+  events.push(newEvent);
+
+  res.status(201).json(newEvent);
+}
