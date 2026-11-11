@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import eventRoutes from "./routes/event-routes.js";
 
 const app = express();
 
@@ -13,5 +14,7 @@ app.get("/health", (req, res) => {
     time: new Date().toISOString()
   });
 });
+
+app.use("/events", eventRoutes);
 
 export default app;
